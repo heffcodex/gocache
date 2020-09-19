@@ -17,6 +17,10 @@ func NewRedisCache(c *redis.Client) Cacher {
 	return &RedisCache{c: c}
 }
 
+func (c *RedisCache) GetScan(key string, v interface{}) (err error) {
+	return c.c.Get(c.key(key)).Scan(v)
+}
+
 func (c *RedisCache) GetInt64(key string) (value int64, err error) {
 	return c.c.Get(c.key(key)).Int64()
 }

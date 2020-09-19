@@ -17,6 +17,10 @@ func NewNopCache() Cacher {
 	return &NopCache{}
 }
 
+func (c *NopCache) GetScan(key string, v interface{}) (err error) {
+	return notFoundError
+}
+
 func (c *NopCache) GetInt64(key string) (value int64, err error) {
 	return 0, notFoundError
 }
