@@ -1,13 +1,17 @@
 package gocache
 
-import "github.com/pkg/errors"
+import (
+	"fmt"
+
+	"github.com/pkg/errors"
+)
 
 type NilError struct {
 	err error
 }
 
 func (e *NilError) Error() string {
-	return e.err.Error()
+	return fmt.Sprintf("key does not exist (%s)", e.err)
 }
 
 type RememberError struct {
