@@ -115,7 +115,7 @@ func (c *RedisCache) key(key string) string {
 
 func (c *RedisCache) wrapErr(err error) error {
 	if err == redis.Nil {
-		err = nil
+		err = &NilError{err: err}
 	}
 
 	return err

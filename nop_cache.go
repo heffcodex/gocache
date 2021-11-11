@@ -3,12 +3,9 @@ package gocache
 import (
 	"context"
 	"time"
-
-	"github.com/pkg/errors"
 )
 
 var _ Cacher = new(NopCache)
-var notFoundError = errors.New("not found")
 
 type NopCache struct {
 	prefix string
@@ -19,19 +16,19 @@ func NewNopCache() Cacher {
 }
 
 func (c *NopCache) GetScan(ctx context.Context, key string, v interface{}) (err error) {
-	return notFoundError
+	return new(NilError)
 }
 
 func (c *NopCache) GetInt64(ctx context.Context, key string) (value int64, err error) {
-	return 0, notFoundError
+	return 0, new(NilError)
 }
 
 func (c *NopCache) GetFloat64(ctx context.Context, key string) (value float64, err error) {
-	return 0, notFoundError
+	return 0, new(NilError)
 }
 
 func (c *NopCache) GetString(ctx context.Context, key string) (value string, err error) {
-	return "", notFoundError
+	return "", new(NilError)
 }
 
 func (c *NopCache) Set(ctx context.Context, key string, value interface{}, ttl time.Duration) (err error) {

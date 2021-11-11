@@ -2,6 +2,14 @@ package gocache
 
 import "github.com/pkg/errors"
 
+type NilError struct {
+	err error
+}
+
+func (e *NilError) Error() string {
+	return e.err.Error()
+}
+
 type RememberError struct {
 	fullKey string
 	err     error
