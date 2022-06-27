@@ -10,6 +10,8 @@ type RememberFloat64Func func() (value float64, err error)
 type RememberStringFunc func() (value string, err error)
 
 type Cacher interface {
+	comparable
+
 	GetScan(ctx context.Context, key string, v interface{}) (err error)
 	GetString(ctx context.Context, key string) (value string, err error)
 	GetInt64(ctx context.Context, key string) (value int64, err error)
