@@ -1,9 +1,9 @@
 module github.com/heffcodex/gocache/v2
 
-go 1.17
+go 1.18
 
 require (
-	github.com/go-redis/redis/v8 v8.11.4
+	github.com/go-redis/redis/v8 v8.11.5
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.5.1
 )
