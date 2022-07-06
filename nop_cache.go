@@ -11,7 +11,7 @@ type NopCache struct {
 	prefix string
 }
 
-func NewNopCache() Cacher {
+func NewNopCache() *NopCache {
 	return &NopCache{}
 }
 

@@ -23,7 +23,7 @@ type MemoryCache struct {
 	prefix   string
 }
 
-func NewMemoryCache() Cacher {
+func NewMemoryCache() *MemoryCache {
 	now := time.Now().Unix()
 
 	return &MemoryCache{

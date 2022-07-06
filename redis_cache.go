@@ -14,7 +14,7 @@ type RedisCache struct {
 	prefix string
 }
 
-func NewRedisCache(c *redis.Client) Cacher {
+func NewRedisCache(c *redis.Client) *RedisCache {
 	return &RedisCache{c: c}
 }
 
