@@ -10,11 +10,11 @@ import (
 var _ Cacher = new(RedisCache)
 
 type RedisCache struct {
-	c      *redis.Client
+	c      redis.UniversalClient
 	prefix string
 }
 
-func NewRedisCache(c *redis.Client) *RedisCache {
+func NewRedisCache(c redis.UniversalClient) *RedisCache {
 	return &RedisCache{c: c}
 }
 
@@ -51,7 +51,9 @@ func (c *RedisCache) Del(ctx context.Context, key string) (err error) {
 	return c.wrapErr(c.c.Del(ctx, key).Err())
 }
 
-func (c *RedisCache) RememberInt64(ctx context.Context, key string, f RememberInt64Func, ttl time.Duration) (value int64, err error) {
+func (c *RedisCache) RememberInt64(
+	ctx context.Context, key string, f RememberInt64Func, ttl time.Duration,
+) (value int64, err error) {
 	value, err = c.c.Get(ctx, c.key(key)).Int64()
 	if err != nil {
 		value, err = f()
@@ -68,7 +70,9 @@ func (c *RedisCache) RememberInt64(ctx context.Context, key string, f RememberIn
 	return
 }
 
-func (c *RedisCache) RememberFloat64(ctx context.Context, key string, f RememberFloat64Func, ttl time.Duration) (value float64, err error) {
+func (c *RedisCache) RememberFloat64(
+	ctx context.Context, key string, f RememberFloat64Func, ttl time.Duration,
+) (value float64, err error) {
 	value, err = c.c.Get(ctx, c.key(key)).Float64()
 	if err != nil {
 		value, err = f()
@@ -85,7 +89,9 @@ func (c *RedisCache) RememberFloat64(ctx context.Context, key string, f Remember
 	return
 }
 
-func (c *RedisCache) RememberString(ctx context.Context, key string, f RememberStringFunc, ttl time.Duration) (value string, err error) {
+func (c *RedisCache) RememberString(
+	ctx context.Context, key string, f RememberStringFunc, ttl time.Duration,
+) (value string, err error) {
 	value, err = c.c.Get(ctx, c.key(key)).Result()
 	if err != nil {
 		value, err = f()
